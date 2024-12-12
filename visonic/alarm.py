@@ -217,16 +217,14 @@ class System(object):
         # Check that the server support API version 4.0 or 8.0.
         rest_versions = self.__api.get_version_info()['rest_versions']
 
-        if '8.0' in rest_versions:
-            print('Rest API version 8.0 is supported.')
-            self.__api.setVersionUrls('8.0')
-        elif '9.0' in rest_versions:
-            print('Rest API version 9.0 is supported.')
-            self.__api.setVersionUrls('9.0')
-        elif '10.0' in rest_versions:
-            print('Rest API version 10.0 is supported.')
-            self.__api.setVersionUrls('10.0')
-        else:
+        supported_versions = ['12.0', '10.0', '9.0', '8.0']
+        found_supported = False
+        for version in supported_versions:
+            if version in rest_versions:
+                self.__api.setVersionUrls(version)
+                found_supported = True
+                break
+        if not found_supported:
             raise Exception(f'Rest API version 8.0, 9.0 or 10.0 is not supported by server. Supported versions: {", ".join(rest_versions)}')
 
 
