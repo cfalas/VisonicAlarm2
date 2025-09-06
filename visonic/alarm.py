@@ -217,7 +217,7 @@ class System(object):
         # Check that the server support API version 4.0 or 8.0.
         rest_versions = self.__api.get_version_info()['rest_versions']
 
-        supported_versions = ['12.0', '10.0', '9.0', '8.0']
+        supported_versions = ['13.0', '12.0', '10.0', '9.0', '8.0']
         found_supported = False
         for version in supported_versions:
             if version in rest_versions:
